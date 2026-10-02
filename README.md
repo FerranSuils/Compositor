@@ -74,8 +74,9 @@ brew install --cask robbietilton-compositor
 - Drag a number's label to scrub its value, as in Photoshop
 - Automatic updates, signed and notarized
 
-### Works with AI agents
+### Works with AI agents and scripts
 - AI agents and scripts can build and edit projects directly: a `.comp` is a folder of PNG layers and a manifest, and an open project updates live as it's written. See [Writing Compositor projects](docs/writing-comp-files.md)
+- Everything in the app is also a local HTTP call: start Compositor with `--automation` and `POST` JSON operations to `http://127.0.0.1:4747/v1/run` (layers, masks, transforms, effects, adjustments, every filter including Camera Raw, selections, brushes, text, canvas, export). `GET /v1/ops` lists them all. See [Automation API](docs/automation-api.md); a Python client and examples are in `scripts/`
 
 ## Requirements
 

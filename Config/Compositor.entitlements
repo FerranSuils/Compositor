@@ -8,6 +8,20 @@
     <true/>
     <key>com.apple.security.network.client</key>
     <true/>
+    <!-- The automation API (docs/automation-api.md) listens on 127.0.0.1 only. -->
+    <key>com.apple.security.network.server</key>
+    <true/>
+    <!-- Scripts name files by path, so the API can read and write anywhere in the home folder, /tmp and mounted volumes. -->
+    <key>com.apple.security.temporary-exception.files.home-relative-path.read-write</key>
+    <array>
+        <string>/</string>
+    </array>
+    <key>com.apple.security.temporary-exception.files.absolute-path.read-write</key>
+    <array>
+        <string>/tmp/</string>
+        <string>/private/tmp/</string>
+        <string>/Volumes/</string>
+    </array>
     <!-- Sparkle installs updates through its helper services, which a sandboxed app reaches by name. -->
     <key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
     <array>

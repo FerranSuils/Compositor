@@ -9,6 +9,8 @@ final class CompositorApplicationDelegate: NSObject, NSApplicationDelegate {
     /// Checks the update feed and installs new versions (Sparkle). Started only after launch: its first-run prompt,
     /// shown during launch, kept the editor window from ever opening.
     let updater = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
+    /// The local HTTP API scripts drive the editor with (docs/automation-api.md). Off unless asked for at launch.
+    let automation = AutomationService()
 
     // Finder Open With and Dock drops, including files delivered during launch.
     func application(_ application: NSApplication, open urls: [URL]) {
@@ -39,6 +41,9 @@ final class CompositorApplicationDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        automation.start(workspace: workspace)
+        // A scripted run shouldn't be interrupted by an update prompt.
+        guard automation.scriptURL == nil else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [updater] in updater.startUpdater() }
     }
 

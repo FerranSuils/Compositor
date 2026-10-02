@@ -1,0 +1,22 @@
+{
+  "stopOnError": true,
+  "steps": [
+    { "op": "project.new", "width": 1920, "height": 1080, "background": "#1B1F2A" },
+    { "op": "layer.addImage", "path": "~/Pictures/portrait.jpg", "name": "Portrait" },
+    { "op": "transform.scale", "layer": "Portrait", "percent": 60 },
+    { "op": "transform.move", "layer": "Portrait", "to": [120, 80] },
+    { "op": "filter.cameraRaw", "layer": "Portrait",
+      "light": { "exposure": 0.35, "contrast": 12, "highlights": -20, "shadows": 18 },
+      "color": { "vibrance": 15 },
+      "effects": { "clarity": 8, "vignette": { "amount": -25 } },
+      "detail": { "sharpenAmount": 40 } },
+    { "op": "filter.removeBackground", "layer": "Portrait", "quality": "Advanced", "refineEdges": 16 },
+    { "op": "adjustmentLayer.add", "kind": "Curves", "name": "Warm grade",
+      "settings": { "red": [[0, 0], [120, 147], [255, 255]], "blue": [[0, 0], [115, 97], [255, 238]] } },
+    { "op": "adjustmentLayer.add", "kind": "Hue/Saturation", "settings": { "saturation": -10 } },
+    { "op": "text.add", "content": "Nordic Byte", "origin": [1200, 860], "fontName": "Helvetica-Bold", "fontSize": 96, "color": "#FFFFFF" },
+    { "op": "effects.set", "effects": { "shadow": { "distance": 12, "blur": 18, "opacity": 0.6 } } },
+    { "op": "project.save", "path": "~/Desktop/portrait-card.comp" },
+    { "op": "project.export", "path": "~/Desktop/portrait-card.jpg", "quality": 0.92 }
+  ]
+}
